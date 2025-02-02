@@ -1,35 +1,64 @@
-body{
+body {
     background-color: #FFC0CB;
     color: white;
-    font-family: 'Arial';
+    font-family: 'Arial', sans-serif;
     text-align: center;
     margin-top: 100px;
 }
-h1{
+
+h1 {
     font-size: 50px;
 }
-h2{
+
+h2 {
     font-size: 30px;
 }
-#oui{
+
+.oui {
     background-color: #008000;
     border-color: #00FF00;
+    display: none;
+    /*peut être remplacé par display: inline-block*/
 }
-#non{
+
+.non {
     background-color: #FF0000;
     border-color: #FF1060;
+    display: none;
+    /*peut être remplacé par display: inline-block*/
 }
-button{
+
+button {
     color: white;
     border: none;
     padding: 10px 20px;
     text-align: center;
-    display: inline-block;
     font-size: 20px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
+    transition: all 0.3s ease;
 }
-button:hover{
+
+button:hover {
     opacity: 0.8;
+}
+
+.hide {
+    display: block;
+    transition: opacity 0.5s ease;
+}
+
+.show {
+    display: none;
+    opacity: 1;
+}
+
+#message {
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 20px;
+    font-style: italic;
+    opacity: 0.8;
+
 }
