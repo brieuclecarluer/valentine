@@ -195,7 +195,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 500);
     });
 
-    nonButton.addEventListener('touchstart', function () {
+    let lastTouchTime = 0;
+    nonButton.addEventListener('touchstart', function (e) {
+        const currentTime = new Date().getTime();
+        if (currentTime - lastTouchTime < 500) {
+            e.preventDefault();
+            return;
+        }
+        lastTouchTime = currentTime;
+
         if (!isNonButtonClickable) return;
         isNonButtonClickable = false;
 
