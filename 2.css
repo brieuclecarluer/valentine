@@ -6,6 +6,7 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 100px;
+    cursor: url('unfilled.png'), auto;
 }
 
 #background-video {
@@ -19,14 +20,14 @@ body {
 }
 
 
-h1, a {
+h1, button{
     font-size: 50px;
     font-weight: bold;
     color: white;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 
@@ -41,6 +42,7 @@ button {
 
 button:hover {
     scale: 1.1;
+    cursor: url('filled.png'), auto;
 }
 
 @media (max-width: 768px) {

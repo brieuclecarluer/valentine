@@ -4,6 +4,8 @@ body {
     font-family: 'Arial', sans-serif;
     text-align: center;
     margin-top: 100px;
+    cursor: url('unfilled.png'), auto;
+
 }
 
 #background-video {
@@ -56,6 +58,8 @@ button {
 
 button:hover {
     opacity: 0.8;
+    cursor: url('filled.png'), auto;
+
 }
 
 .hide {

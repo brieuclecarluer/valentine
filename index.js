@@ -32,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function () {
     let ouiButtonSizex = 100; 
     let ouiButtonSizey = 50; 
 
+    const trail = document.createElement('div');
+    trail.style.position = 'fixed';
+    trail.style.width = '10px';
+    trail.style.height = '10px';
+    trail.style.backgroundColor = 'pink';
+    trail.style.borderRadius = '50%';
+    trail.style.pointerEvents = 'none'; 
+    document.body.appendChild(trail);
+  
+    document.addEventListener('mousemove', (e) => {
+      trail.style.left = `${e.pageX - 5}px`; 
+      trail.style.top = `${e.pageY - 5}px`;
+    });
+
     function showButtons() {
         nonButton.style.display = 'inline-block';
         ouiButton.style.display = 'inline-block';
