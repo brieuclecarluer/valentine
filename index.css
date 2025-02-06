@@ -72,12 +72,12 @@ button:hover {
 }
 
 .hide {
-    display: block; /* Afficher initialement */
+    display: block; 
     transition: opacity 0.5s ease;
 }
 
 .show {
-    display: none; /* Masquer initialement */
+    display: none;
     opacity: 1;
 }
 
@@ -97,19 +97,6 @@ button:hover {
     button {
         font-size: 16px;
         padding: 8px 16px;
-    }
-
-    #background-video {
-        width: 100%;
-        height: 100%;
-    }
-
-    .hide {
-        display: block; /* Afficher initialement sur mobile */
-    }
-
-    .show {
-        display: none; /* Masquer initialement sur mobile */
     }
 
 }
