@@ -177,31 +177,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     nonButton.addEventListener('click', function () {
-        if (!isNonButtonClickable) return; // Si le bouton n'est pas cliquable, on ne fait rien
-        isNonButtonClickable = false; // Désactiver le bouton temporairement
+        if (!isNonButtonClickable) return; 
+        isNonButtonClickable = false;
 
         isNonButtonClicked = true;
         resizeButton();
         moveButton();
 
-        // Réactiver le bouton après un court délai
         setTimeout(() => {
             isNonButtonClickable = true;
-        }, 500); // Délai de 500 ms
+        }, 500); 
     });
 
     nonButton.addEventListener('touchstart', function () {
-        if (!isNonButtonClickable) return; // Si le bouton n'est pas cliquable, on ne fait rien
-        isNonButtonClickable = false; // Désactiver le bouton temporairement
+        if (!isNonButtonClickable) return;
+        isNonButtonClickable = false; 
 
         isNonButtonClicked = true;
         resizeButton();
         moveButton();
 
-        // Réactiver le bouton après un court délai
         setTimeout(() => {
             isNonButtonClickable = true;
-        }, 500); // Délai de 500 ms
+        }, 500); 
     });
 
     ouiButton.addEventListener('click', function () {

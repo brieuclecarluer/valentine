@@ -81,7 +81,7 @@ button:hover {
     opacity: 1;
 }
 
-/* Media queries pour les écrans mobiles */
+
 @media (max-width: 768px) {
     body {
         margin-top: 50px;
@@ -107,7 +107,7 @@ button:hover {
 
     .oui, .non {
         display: inline-block;
-        opacity: 1; /* Les boutons sont visibles directement sur mobile */
+        opacity: 1; 
     }
 
     .hide {
@@ -119,7 +119,6 @@ button:hover {
     }
 }
 
-/* Style pour les cœurs */
 .heart {
     position: absolute;
     transform-style: preserve-3d;
