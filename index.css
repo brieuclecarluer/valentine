@@ -4,8 +4,6 @@ body {
     font-family: 'Arial', sans-serif;
     text-align: center;
     margin-top: 100px;
-    cursor: url('unfilled.png'), auto;
-
 }
 
 #background-video {
@@ -36,12 +34,14 @@ h2 {
     border-color: #00FF00;
     display: none;
     transition: all 0.2s ease;
+    cursor: url('filled.png')8 8, auto;
 }
 
 .non {
     background-color: #FF0000;
     border-color: #FF1060;
     display: none;
+    cursor: url('cross.png')8 8, auto;
 }
 
 button {
@@ -58,8 +58,6 @@ button {
 
 button:hover {
     opacity: 0.8;
-    cursor: url('filled.png'), auto;
-
 }
 
 .hide {
@@ -114,4 +112,20 @@ button:hover {
     .show {
         display: block;
     }
+}
+
+/* Style pour les cœurs */
+.heart {
+    position: absolute;
+    transform-style: preserve-3d;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    font-size: 2rem;
+    opacity: 0.8;
+    transition: opacity 1s ease-out;
+}
+
+.heart:hover {
+    opacity: 1;
 }

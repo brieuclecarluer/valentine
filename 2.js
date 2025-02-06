@@ -1,25 +1,45 @@
+let x1 = 0, y1 = 0;
+const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0),
+    dist_to_draw = 50,
+    delay = 1000,  
+    fsize = [
+        '20px', '25px', '30px', '35px'
+    ],  
+    rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,  
+    selRand = (o) => o[rand(0, o.length -1)],  
+    distanceTo = (x1, y1, x2, y2) => Math.sqrt((Math.pow(x2 - x1, 2)) + (Math.pow(y2 - y1, 2))), 
+    shouldDraw = (x, y) => (distanceTo(x1, y1, x, y) >= dist_to_draw),  
+    addHeart = (x, y) => {
+        const heart = document.createElement("div");
+        heart.innerHTML = '❤️'; 
+        heart.className = 'heart';
+        heart.style.top = `${y + rand(-20, 20)}px`;
+        heart.style.left = `${x}px`; 
+        heart.style.fontSize = selRand(fsize); 
+        document.body.appendChild(heart);
+        
+        const fs = 10 + 5 * parseFloat(getComputedStyle(heart).fontSize);
+        
 
-  const trailElements = [];
-  const trailLength = 10; 
+        heart.animate({
+          translate: `0 ${(y + fs) > vh ? vh - y : fs}px`, 
+          opacity: 0, 
+          transform: `rotateX(${rand(1, 500)}deg) rotateY(${rand(1, 500)}deg)` 
+          }, {
+          duration: delay,
+          fill: 'forwards',
+        });
+        
+        setTimeout(() => {
+        heart.remove();
+        }, delay);
+    };
 
-  for (let i = 0; i < trailLength; i++) {
-    const trail = document.createElement('div');
-    trail.style.position = 'fixed';
-    trail.style.width = '10px';
-    trail.style.height = '10px';
-    trail.style.backgroundColor = 'pink';
-    trail.style.borderRadius = '50%';
-    trail.style.pointerEvents = 'none';
-    trail.style.opacity = (trailLength - i) / trailLength; 
-    document.body.appendChild(trail);
-    trailElements.push(trail);
-  }
-
-  document.addEventListener('mousemove', (e) => {
-    trailElements.forEach((trail, index) => {
-      setTimeout(() => {
-        trail.style.left = `${e.pageX - 5}px`;
-        trail.style.top = `${e.pageY - 5}px`;
-      }, index * 20); 
-    });
-  });
+addEventListener("mousemove", (e) => {
+const {clientX, clientY} = e;
+if (shouldDraw(clientX, clientY)) {
+    addHeart(clientX, clientY);
+    x1 = clientX;
+    y1 = clientY;
+    }
+});
