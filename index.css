@@ -30,9 +30,9 @@ h2 {
 }
 
 .oui, .non {
-    display: none;
-    opacity: 0; 
-    transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease;
+    display: none; /* Cachés par défaut */
+    opacity: 0; /* Opacité initiale à 0 pour le fondu */
+    transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease; /* Transition pour opacité, left et top */
 }
 
 .oui {
@@ -56,7 +56,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
-    transition: opacity 0.5s ease; 
+    transition: opacity 0.5s ease; /* Transition uniquement pour l'opacité */
 }
 
 button:hover {
@@ -81,6 +81,7 @@ button:hover {
     opacity: 1;
 }
 
+/* Media queries pour les écrans mobiles */
 @media (max-width: 768px) {
     body {
         margin-top: 50px;
@@ -106,7 +107,7 @@ button:hover {
 
     .oui, .non {
         display: inline-block;
-        opacity: 1;
+        opacity: 1; /* Les boutons sont visibles directement sur mobile */
     }
 
     .hide {
@@ -118,6 +119,7 @@ button:hover {
     }
 }
 
+/* Style pour les cœurs */
 .heart {
     position: absolute;
     transform-style: preserve-3d;

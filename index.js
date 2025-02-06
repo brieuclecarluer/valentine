@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     let isNonButtonClicked = false;
+    let isNonButtonClickable = true; // Contrôle si le bouton "Non" est cliquable
     let ouiButtonSizex = 100;
     let ouiButtonSizey = 50;
 
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
 
         nonButton.style.position = 'absolute';
-        nonButton.style.transition = 'left 0.5s ease, top 0.5s ease'; 
+        nonButton.style.transition = 'left 0.5s ease, top 0.5s ease'; // Transition pour le déplacement
         nonButton.style.left = `${randomX}px`;
         nonButton.style.top = `${randomY}px`;
 
@@ -134,8 +135,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function resizeButton() {
         if (!isNonButtonClicked) return;
+
+        const maxWidth = window.innerWidth * 0.8; // 80% de la largeur de l'écran
+        const maxHeight = window.innerHeight * 0.8; // 80% de la hauteur de l'écran
+
         ouiButtonSizex += 15;
         ouiButtonSizey += 5;
+
+        // Limiter la taille du bouton "Oui" aux bordures de l'écran
+        if (ouiButtonSizex > maxWidth) ouiButtonSizex = maxWidth;
+        if (ouiButtonSizey > maxHeight) ouiButtonSizey = maxHeight;
+
         ouiButton.style.width = `${ouiButtonSizex}px`;
         ouiButton.style.height = `${ouiButtonSizey}px`;
     }
@@ -143,14 +153,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleContent() {
         kenza.style.fontSize = '50px';
 
+        // Masquer les éléments avec la classe .hide
         hideElements.forEach(element => {
-            element.classList.toggle('hide');
-            element.classList.toggle('show');
+            element.style.display = 'none';
         });
 
+        // Afficher les éléments avec la classe .show
         showElements.forEach(element => {
-            element.classList.toggle('hide');
-            element.classList.toggle('show');
+            element.style.display = 'block';
         });
 
         showButtons();
@@ -167,15 +177,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     nonButton.addEventListener('click', function () {
+        if (!isNonButtonClickable) return; // Si le bouton n'est pas cliquable, on ne fait rien
+        isNonButtonClickable = false; // Désactiver le bouton temporairement
+
         isNonButtonClicked = true;
         resizeButton();
         moveButton();
+
+        // Réactiver le bouton après un court délai
+        setTimeout(() => {
+            isNonButtonClickable = true;
+        }, 500); // Délai de 500 ms
     });
 
     nonButton.addEventListener('touchstart', function () {
+        if (!isNonButtonClickable) return; // Si le bouton n'est pas cliquable, on ne fait rien
+        isNonButtonClickable = false; // Désactiver le bouton temporairement
+
         isNonButtonClicked = true;
-        moveButton();
         resizeButton();
+        moveButton();
+
+        // Réactiver le bouton après un court délai
+        setTimeout(() => {
+            isNonButtonClickable = true;
+        }, 500); // Délai de 500 ms
     });
 
     ouiButton.addEventListener('click', function () {
