@@ -82,6 +82,7 @@ button:hover {
     opacity: 1;
 }
 
+
 @media (max-width: 768px) {
     body {
         margin-top: 50px;
@@ -111,11 +112,11 @@ button:hover {
     }
 
     .hide {
-        display: none;
+        display: block; 
     }
 
     .show {
-        display: block;
+        display: none;
     }
 }
 
