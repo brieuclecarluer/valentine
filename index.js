@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let x1 = 0, y1 = 0;
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0),
         dist_to_draw = 50,
-        delay = 1000,
+        delay = 2000,
         fsize = ['20px', '25px', '30px', '35px'],
         rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
         selRand = (o) => o[rand(0, o.length - 1)],
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ouiButton.disabled = true;
         setTimeout(() => {
             ouiButton.disabled = false;
-        }, 1000);
+        }, 2000);
 
         setTimeout(() => {
             isNonButtonClickable = true;
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ouiButton.disabled = true;
         setTimeout(() => {
             ouiButton.disabled = false;
-        }, 1000);
+        }, 2000);
 
         setTimeout(() => {
             isNonButtonClickable = true;
