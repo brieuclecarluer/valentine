@@ -151,14 +151,14 @@ document.addEventListener('DOMContentLoaded', function () {
         kenza.style.fontSize = '50px';
 
         hideElements.forEach(element => {
-            element.style.display = 'none';
+            element.style.display = 'none'; // Masquer le message "Appuie sur n'importe quelle touche"
         });
 
         showElements.forEach(element => {
-            element.style.display = 'block';
+            element.style.display = 'block'; // Afficher le message "Veux-tu être ma Valentine ?"
         });
 
-        showButtons();
+        showButtons(); // Afficher les boutons
         document.removeEventListener('click', toggleContent);
         document.removeEventListener('keydown', toggleContent);
         document.removeEventListener('touchstart', toggleContent);

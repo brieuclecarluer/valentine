@@ -30,7 +30,7 @@ h2 {
 }
 
 .oui, .non {
-    display: none;
+    display: none; /* Masquer les boutons initialement */
     opacity: 0;
     transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease;
 }
@@ -72,12 +72,12 @@ button:hover {
 }
 
 .hide {
-    display: block;
+    display: block; /* Afficher initialement */
     transition: opacity 0.5s ease;
 }
 
 .show {
-    display: none;
+    display: none; /* Masquer initialement */
     opacity: 1;
 }
 
@@ -105,17 +105,18 @@ button:hover {
     }
 
     .hide {
-        display: none !important; /* Masquer initialement sur mobile */
+        display: block; /* Afficher initialement sur mobile */
     }
 
     .show {
         display: none; /* Masquer initialement sur mobile */
     }
 
-    .oui, .non {
+    /* Supprimez cette partie pour éviter que les boutons soient affichés initialement */
+    /* .oui, .non {
         display: inline-block !important;
         opacity: 1 !important;
-    }
+    } */
 }
 
 .heart {
