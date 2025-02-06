@@ -29,59 +29,87 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     let isNonButtonClicked = false;
-    let ouiButtonSizex = 100; 
-    let ouiButtonSizey = 50; 
+    let ouiButtonSizex = 100;
+    let ouiButtonSizey = 50;
 
     let x1 = 0, y1 = 0;
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0),
         dist_to_draw = 50,
-        delay = 1000,  
-        fsize = [
-            '20px', '25px', '30px', '35px'
-        ],  
-        rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,  
-        selRand = (o) => o[rand(0, o.length -1)],  
-        distanceTo = (x1, y1, x2, y2) => Math.sqrt((Math.pow(x2 - x1, 2)) + (Math.pow(y2 - y1, 2))), 
-        shouldDraw = (x, y) => (distanceTo(x1, y1, x, y) >= dist_to_draw),  
+        delay = 1000,
+        fsize = ['20px', '25px', '30px', '35px'],
+        rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
+        selRand = (o) => o[rand(0, o.length - 1)],
+        distanceTo = (x1, y1, x2, y2) => Math.sqrt((Math.pow(x2 - x1, 2)) + (Math.pow(y2 - y1, 2))),
+        shouldDraw = (x, y) => (distanceTo(x1, y1, x, y) >= dist_to_draw),
         addHeart = (x, y) => {
             const heart = document.createElement("div");
-            heart.innerHTML = '❤️'; 
+            heart.innerHTML = '❤️';
             heart.className = 'heart';
             heart.style.top = `${y + rand(-20, 20)}px`;
-            heart.style.left = `${x}px`; 
-            heart.style.fontSize = selRand(fsize); 
+            heart.style.left = `${x}px`;
+            heart.style.fontSize = selRand(fsize);
             document.body.appendChild(heart);
-            
+
             const fs = 10 + 5 * parseFloat(getComputedStyle(heart).fontSize);
-            
 
             heart.animate({
-            translate: `0 ${(y + fs) > vh ? vh - y : fs}px`, 
-            opacity: 0, 
-            transform: `rotateX(${rand(1, 500)}deg) rotateY(${rand(1, 500)}deg)` 
+                translate: `0 ${(y + fs) > vh ? vh - y : fs}px`,
+                opacity: 0,
+                transform: `rotateX(${rand(1, 500)}deg) rotateY(${rand(1, 500)}deg)`
             }, {
-            duration: delay,
-            fill: 'forwards',
+                duration: delay,
+                fill: 'forwards',
             });
-            
+
             setTimeout(() => {
-            heart.remove();
+                heart.remove();
             }, delay);
         };
 
-    addEventListener("mousemove", (e) => {
-    const {clientX, clientY} = e;
-    if (shouldDraw(clientX, clientY)) {
-        addHeart(clientX, clientY);
-        x1 = clientX;
-        y1 = clientY;
+    const handleInteraction = (x, y) => {
+        if (shouldDraw(x, y)) {
+            addHeart(x, y);
+            x1 = x;
+            y1 = y;
         }
+    };
+
+    addEventListener("mousemove", (e) => {
+        handleInteraction(e.clientX, e.clientY);
     });
 
+    addEventListener("click", (e) => {
+        handleInteraction(e.clientX, e.clientY);
+    });
+
+    addEventListener("touchstart", (e) => {
+        const touch = e.touches[0];
+        handleInteraction(touch.clientX, touch.clientY);
+    });
+
+    addEventListener("touchmove", (e) => {
+        const touch = e.touches[0];
+        handleInteraction(touch.clientX, touch.clientY);
+    });
 
     function showButtons() {
         nonButton.style.display = 'inline-block';
         ouiButton.style.display = 'inline-block';
+
+        if (window.innerWidth > 768) {
+            nonButton.style.opacity = '0';
+            ouiButton.style.opacity = '0';
+    
+            setTimeout(() => {
+                nonButton.style.transition = 'opacity 0.5s ease';
+                ouiButton.style.transition = 'opacity 0.5s ease';
+                nonButton.style.opacity = '1';
+                ouiButton.style.opacity = '1';
+            }, 10);
+        } else {
+            nonButton.style.opacity = '1';
+            ouiButton.style.opacity = '1';
+        }
     }
 
     let messageIndex = 0;
@@ -96,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
 
         nonButton.style.position = 'absolute';
+        nonButton.style.transition = 'left 0.5s ease, top 0.5s ease'; 
         nonButton.style.left = `${randomX}px`;
         nonButton.style.top = `${randomY}px`;
 
@@ -127,24 +156,33 @@ document.addEventListener('DOMContentLoaded', function () {
         showButtons();
         document.removeEventListener('click', toggleContent);
         document.removeEventListener('keydown', toggleContent);
+        document.removeEventListener('touchstart', toggleContent);
     }
-
-    nonButton.addEventListener('click', function () {
-        isNonButtonClicked = true; 
-        moveButton();
-    });
 
     nonButton.addEventListener('mouseover', function () {
         if (isNonButtonClicked) {
             moveButton();
-            resizeButton(); 
+            resizeButton();
         }
     });
 
+    nonButton.addEventListener('click', function () {
+        isNonButtonClicked = true;
+        resizeButton();
+        moveButton();
+    });
+
+    nonButton.addEventListener('touchstart', function () {
+        isNonButtonClicked = true;
+        moveButton();
+        resizeButton();
+    });
+
     ouiButton.addEventListener('click', function () {
-        window.location.href = 'accepte.html'; 
+        window.location.href = 'accepte.html';
     });
 
     document.addEventListener('click', toggleContent);
     document.addEventListener('keydown', toggleContent);
+    document.addEventListener('touchstart', toggleContent);
 });

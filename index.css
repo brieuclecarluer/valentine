@@ -29,18 +29,21 @@ h2 {
     font-size: 30px;
 }
 
+.oui, .non {
+    display: none;
+    opacity: 0; 
+    transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease;
+}
+
 .oui {
     background-color: #008000;
     border-color: #00FF00;
-    display: none;
-    transition: all 0.2s ease;
     cursor: url('filled.png')8 8, auto;
 }
 
 .non {
     background-color: #FF0000;
     border-color: #FF1060;
-    display: none;
     cursor: url('cross.png')8 8, auto;
 }
 
@@ -53,11 +56,19 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 16px;
-    transition: all 0.2s ease;
+    transition: opacity 0.5s ease; 
 }
 
 button:hover {
     opacity: 0.8;
+}
+
+#message {
+    font-size: 25px;
+    color: #ffffff;
+    margin-top: 20px;
+    font-style: italic;
+    opacity: 1;
 }
 
 .hide {
@@ -67,14 +78,6 @@ button:hover {
 
 .show {
     display: none;
-    opacity: 1;
-}
-
-#message {
-    font-size: 25px;
-    color: #ffffff;
-    margin-top: 20px;
-    font-style: italic;
     opacity: 1;
 }
 
@@ -103,6 +106,7 @@ button:hover {
 
     .oui, .non {
         display: inline-block;
+        opacity: 1;
     }
 
     .hide {
@@ -114,7 +118,6 @@ button:hover {
     }
 }
 
-/* Style pour les cœurs */
 .heart {
     position: absolute;
     transform-style: preserve-3d;
