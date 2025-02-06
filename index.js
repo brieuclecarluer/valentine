@@ -97,10 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
         nonButton.style.display = 'inline-block';
         ouiButton.style.display = 'inline-block';
 
-        
         nonButton.style.opacity = '1';
         ouiButton.style.opacity = '1';
-        
     }
 
     let messageIndex = 0;
@@ -111,8 +109,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const windowHeight = window.innerHeight;
         const buttonWidth = nonButton.offsetWidth;
         const buttonHeight = nonButton.offsetHeight;
-        const randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));
-        const randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
+        const ouiButtonRect = ouiButton.getBoundingClientRect();
+
+        let randomX, randomY;
+        let isOverlapping;
+
+        do {
+            randomX = Math.floor(Math.random() * (windowWidth - buttonWidth));
+            randomY = Math.floor(Math.random() * (windowHeight - buttonHeight));
+
+            const nonButtonRect = {
+                left: randomX,
+                top: randomY,
+                right: randomX + buttonWidth,
+                bottom: randomY + buttonHeight
+            };
+
+            isOverlapping = !(
+                nonButtonRect.right < ouiButtonRect.left ||
+                nonButtonRect.left > ouiButtonRect.right ||
+                nonButtonRect.bottom < ouiButtonRect.top ||
+                nonButtonRect.top > ouiButtonRect.bottom
+            );
+        } while (isOverlapping);
 
         nonButton.style.position = 'absolute';
         nonButton.style.transition = 'left 0.5s ease, top 0.5s ease';
