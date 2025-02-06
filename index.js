@@ -97,18 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
         nonButton.style.display = 'inline-block';
         ouiButton.style.display = 'inline-block';
 
-        if (window.innerWidth > 768) {
-            nonButton.style.opacity = '0';
-            ouiButton.style.opacity = '0';
-
-            setTimeout(() => {
-                nonButton.style.opacity = '1';
-                ouiButton.style.opacity = '1';
-            }, 10);
-        } else {
-            nonButton.style.opacity = '1';
-            ouiButton.style.opacity = '1';
-        }
+        
+        nonButton.style.opacity = '1';
+        ouiButton.style.opacity = '1';
+        
     }
 
     let messageIndex = 0;
@@ -151,14 +143,14 @@ document.addEventListener('DOMContentLoaded', function () {
         kenza.style.fontSize = '50px';
 
         hideElements.forEach(element => {
-            element.style.display = 'none'; // Masquer le message "Appuie sur n'importe quelle touche"
+            element.style.display = 'none'; 
         });
 
         showElements.forEach(element => {
-            element.style.display = 'block'; // Afficher le message "Veux-tu être ma Valentine ?"
+            element.style.display = 'block';
         });
 
-        showButtons(); // Afficher les boutons
+        showButtons(); 
         document.removeEventListener('click', toggleContent);
         document.removeEventListener('keydown', toggleContent);
         document.removeEventListener('touchstart', toggleContent);
