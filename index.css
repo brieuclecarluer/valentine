@@ -112,11 +112,6 @@ button:hover {
         display: none; /* Masquer initialement sur mobile */
     }
 
-    /* Supprimez cette partie pour éviter que les boutons soient affichés initialement */
-    /* .oui, .non {
-        display: inline-block !important;
-        opacity: 1 !important;
-    } */
 }
 
 .heart {
