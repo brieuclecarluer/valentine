@@ -30,10 +30,11 @@ h2 {
 }
 
 .oui, .non {
-    display: none; /* Cachés par défaut */
-    opacity: 0; /* Opacité initiale à 0 pour le fondu */
-    transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease; /* Transition pour opacité, left et top */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, left 0.5s ease, top 0.5s ease;
 }
+
 
 .oui {
     background-color: #008000;
@@ -105,8 +106,8 @@ button:hover {
     }
 
     .oui, .non {
-        display: inline-block;
-        opacity: 1; 
+        display: inline-block !important;
+        opacity: 1 !important;
     }
 
     .hide {
@@ -117,6 +118,8 @@ button:hover {
         display: block;
     }
 }
+
+
 
 .heart {
     position: absolute;

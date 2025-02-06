@@ -96,14 +96,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function showButtons() {
         nonButton.style.display = 'inline-block';
         ouiButton.style.display = 'inline-block';
-
+    
+        
+        void nonButton.offsetWidth;
+        void ouiButton.offsetWidth;
+    
         if (window.innerWidth > 768) {
             nonButton.style.opacity = '0';
             ouiButton.style.opacity = '0';
-
+    
             setTimeout(() => {
-                nonButton.style.transition = 'opacity 0.5s ease';
-                ouiButton.style.transition = 'opacity 0.5s ease';
                 nonButton.style.opacity = '1';
                 ouiButton.style.opacity = '1';
             }, 10);
@@ -112,6 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ouiButton.style.opacity = '1';
         }
     }
+    
+
 
     let messageIndex = 0;
     function moveButton() {
