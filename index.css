@@ -112,11 +112,11 @@ button:hover {
     }
 
     .hide {
-        display: block; 
+        display: block !important; 
     }
 
     .show {
-        display: none;
+        display: none; 
     }
 }
 
