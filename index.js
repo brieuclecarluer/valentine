@@ -190,20 +190,18 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeButton();
         moveButton();
 
+        // Désactiver le bouton "Oui" pendant 1 seconde
+        ouiButton.disabled = true;
+        setTimeout(() => {
+            ouiButton.disabled = false;
+        }, 1000);
+
         setTimeout(() => {
             isNonButtonClickable = true;
         }, 500);
     });
 
-    let lastTouchTime = 0;
     nonButton.addEventListener('touchstart', function (e) {
-        const currentTime = new Date().getTime();
-        if (currentTime - lastTouchTime < 500) {
-            e.preventDefault();
-            return;
-        }
-        lastTouchTime = currentTime;
-
         if (!isNonButtonClickable) return;
         isNonButtonClickable = false;
 
@@ -211,12 +209,19 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeButton();
         moveButton();
 
+        // Désactiver le bouton "Oui" pendant 1 seconde
+        ouiButton.disabled = true;
+        setTimeout(() => {
+            ouiButton.disabled = false;
+        }, 1000);
+
         setTimeout(() => {
             isNonButtonClickable = true;
         }, 500);
     });
 
     ouiButton.addEventListener('click', function () {
+        if (ouiButton.disabled) return; // Empêcher l'action si le bouton est désactivé
         window.location.href = 'accepte.html';
     });
 
