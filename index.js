@@ -7,14 +7,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const messageElement = document.getElementById('message');
 
     const messages = [
-        "Clique sur Oui?", "Tu joue a quoi?", "Bah frère clique sur oui juste nan?",
-        "Je le prend mal hein", "Bon aller arrete de faire genre tu veux cliquer sur Oui ca se voit",
-        "Pff t'essaye juste de voir tout les messages a ce niveau", "Bah vzy t'sais quoi en fait je m'en fou de toi",
-        "Bon... je vais te laisser réfléchir", "C'est bon tu as fini de réfléchir?",
-        "T'es trop une actrice c'est grave", "Arrete de faire la princesse là",
-        "Je vais pas te suplier crois pas", "T'facon t'es bloqué ici",
-        "Quitte pas la page il y a une suprise sur le Oui", "Aller c'est le moment de cliquer",
-        "3", "2", "1", "Clique sur Oui!"
+        "Clique sur Oui?",
+        "Tu joue a quoi?",
+        "Bah frère clique sur oui juste nan?",
+        "Je le prend mal hein",
+        "Bon aller arrete de faire genre tu veux cliquer sur Oui ca se voit",
+        "Pff t'essaye juste de voir tout les messages a ce niveau",
+        "Bah vzy t'sais quoi en fait je m'en fou de toi",
+        "Bon... je vais te laisser réfléchir",
+        "C'est bon tu as fini de réfléchir?",
+        "T'es trop une actrice c'est grave",
+        "Arrete de faire la princesse là",
+        "Je vais pas te suplier crois pas",
+        "T'facon t'es bloqué ici",
+        "Quitte pas la page il y a une suprise sur le Oui",
+        "Aller c'est le moment de cliquer",
+        "3",
+        "2",
+        "1",
+        "Clique sur Oui!",
     ];
 
     let isNonButtonClicked = false;
@@ -23,35 +34,38 @@ document.addEventListener('DOMContentLoaded', function () {
     let ouiButtonSizey = 50;
 
     let x1 = 0, y1 = 0;
-    const vh = Math.max(document.documentElement.clientHeight, window.innerHeight);
-    const dist_to_draw = 50;
-    const delay = 1000;
-    const fsize = ['20px', '25px', '30px', '35px'];
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0),
+        dist_to_draw = 50,
+        delay = 1000,
+        fsize = ['20px', '25px', '30px', '35px'],
+        rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
+        selRand = (o) => o[rand(0, o.length - 1)],
+        distanceTo = (x1, y1, x2, y2) => Math.sqrt((Math.pow(x2 - x1, 2)) + (Math.pow(y2 - y1, 2))),
+        shouldDraw = (x, y) => (distanceTo(x1, y1, x, y) >= dist_to_draw),
+        addHeart = (x, y) => {
+            const heart = document.createElement("div");
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.top = `${y + rand(-20, 20)}px`;
+            heart.style.left = `${x}px`;
+            heart.style.fontSize = selRand(fsize);
+            document.body.appendChild(heart);
 
-    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-    const selRand = (o) => o[rand(0, o.length - 1)];
-    const distanceTo = (x1, y1, x2, y2) => Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    const shouldDraw = (x, y) => distanceTo(x1, y1, x, y) >= dist_to_draw;
+            const fs = 10 + 5 * parseFloat(getComputedStyle(heart).fontSize);
 
-    const addHeart = (x, y) => {
-        const heart = document.createElement("div");
-        heart.innerHTML = '❤️';
-        heart.className = 'heart';
-        heart.style.top = `${y + rand(-20, 20)}px`;
-        heart.style.left = `${x}px`;
-        heart.style.fontSize = selRand(fsize);
-        document.body.appendChild(heart);
+            heart.animate({
+                translate: `0 ${(y + fs) > vh ? vh - y : fs}px`,
+                opacity: 0,
+                transform: `rotateX(${rand(1, 500)}deg) rotateY(${rand(1, 500)}deg)`
+            }, {
+                duration: delay,
+                fill: 'forwards',
+            });
 
-        const fs = 10 + 5 * parseFloat(getComputedStyle(heart).fontSize);
-
-        heart.animate({
-            translate: `0 ${(y + fs) > vh ? vh - y : fs}px`,
-            opacity: 0,
-            transform: `rotateX(${rand(1, 500)}deg) rotateY(${rand(1, 500)}deg)`
-        }, { duration: delay, fill: 'forwards' });
-
-        setTimeout(() => heart.remove(), delay);
-    };
+            setTimeout(() => {
+                heart.remove();
+            }, delay);
+        };
 
     const handleInteraction = (x, y) => {
         if (shouldDraw(x, y)) {
@@ -61,10 +75,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    addEventListener("mousemove", (e) => handleInteraction(e.clientX, e.clientY));
-    addEventListener("click", (e) => handleInteraction(e.clientX, e.clientY));
-    addEventListener("touchstart", (e) => handleInteraction(e.touches[0].clientX, e.touches[0].clientY));
-    addEventListener("touchmove", (e) => handleInteraction(e.touches[0].clientX, e.touches[0].clientY));
+    addEventListener("mousemove", (e) => {
+        handleInteraction(e.clientX, e.clientY);
+    });
+
+    addEventListener("click", (e) => {
+        handleInteraction(e.clientX, e.clientY);
+    });
+
+    addEventListener("touchstart", (e) => {
+        const touch = e.touches[0];
+        handleInteraction(touch.clientX, touch.clientY);
+    });
+
+    addEventListener("touchmove", (e) => {
+        const touch = e.touches[0];
+        handleInteraction(touch.clientX, touch.clientY);
+    });
 
     function showButtons() {
         nonButton.style.display = 'inline-block';
@@ -125,11 +152,15 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleContent() {
         kenza.style.fontSize = '50px';
 
-        hideElements.forEach(element => element.style.display = 'none');
-        showElements.forEach(element => element.style.display = 'block');
+        hideElements.forEach(element => {
+            element.style.display = 'none';
+        });
+
+        showElements.forEach(element => {
+            element.style.display = 'block';
+        });
 
         showButtons();
-
         document.removeEventListener('click', toggleContent);
         document.removeEventListener('keydown', toggleContent);
         document.removeEventListener('touchstart', toggleContent);
@@ -150,7 +181,9 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeButton();
         moveButton();
 
-        setTimeout(() => isNonButtonClickable = true, 500);
+        setTimeout(() => {
+            isNonButtonClickable = true;
+        }, 500);
     });
 
     nonButton.addEventListener('touchstart', function () {
@@ -161,7 +194,9 @@ document.addEventListener('DOMContentLoaded', function () {
         resizeButton();
         moveButton();
 
-        setTimeout(() => isNonButtonClickable = true, 500);
+        setTimeout(() => {
+            isNonButtonClickable = true;
+        }, 500);
     });
 
     ouiButton.addEventListener('click', function () {
